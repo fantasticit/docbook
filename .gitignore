@@ -64,7 +64,6 @@ dist
 temp
 .DS_Store
 .idea
-lib
 stats.json
 tslint.json
 
@@ -72,6 +71,3 @@ tslint.json
 *.un~
 *.vscode
 
-# build
-lib/
-dist/

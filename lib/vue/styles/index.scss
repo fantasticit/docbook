@@ -1,0 +1,63 @@
+@import './normalize.scss';
+@import './markdown.scss';
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: hsla(220, 4%, 58%, 0.3);
+  transition: background-color 0.3s;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  word-break: keep-all;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+button {
+  outline: none;
+  box-shadow: none;
+}
+
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    flex: 1;
+    overflow: hidden;
+
+    > * {
+      padding: 1rem 1rem 0;
+      height: 100%;
+      overflow: auto;
+    }
+  }
+
+  .el-menu-item > a {
+    display: block;
+  }
+}
