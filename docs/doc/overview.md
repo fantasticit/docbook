@@ -1,0 +1,33 @@
+## 概述
+
+`docbook` 致力于静态文档站快速生成。
+
+- 零配置撰写文档站，无需关心 webpack 配置
+- 强约定使用 `docs` 下文件生成文档
+
+### 安装
+
+#### 全局安装
+
+```shell
+npm i -g @fantasticit/docbook
+```
+
+#### 项目中使用
+
+```shell
+npm i -D @fantasticit/docbook
+```
+
+在项目中撰写 `docs` 内容，在 `package.json` 中加入如下 `scripits`。
+
+```json
+{
+  "doc:dev": "docbook dev",
+  "doc:build": "docbook build"
+}
+```
+
+执行 `npm run doc:dev` 即可打开文档站。
+
+[注意] 需要在 `docs` 内编写 `config.js`，具体配置查看文档。
