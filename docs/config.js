@@ -1,5 +1,5 @@
 export default {
-  title: '测试文档',
+  title: 'docbook',
   logo: 'Docbook',
   js: [
     "https://unpkg.com/spritejs@3.7.27/dist/spritejs.min.js",
