@@ -2,6 +2,7 @@
 
 通过 `docs/config.js` 指定文档配置。
 
+- `icon`: favicon 配置
 - `title`: 文档站标题
 - `logo`: Logo 配置，支持 HTML 字符串
 - `js`: 需要额外注入的 js 资源地址，形如：`["https://www.qcharts.cn/qcharts.js"]`
