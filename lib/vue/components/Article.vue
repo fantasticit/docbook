@@ -17,8 +17,9 @@
       </svg>
     </button>
 
-    <el-col :xs="24" :sm="20" class="markdown-container">
-      <router-view class="markdown-content"></router-view>
+    <el-col :xs="24" :sm="20" class="markdown-container" ref="content">
+      <router-view class="markdown-content">
+      </router-view>
       <el-backtop target=".markdown-container"></el-backtop>
     </el-col>
   </el-row>
@@ -37,6 +38,13 @@ export default {
     return {
       showMenu: false,
       showPath: 'pie'
+    }
+  },
+  watch: {
+    '$route'() {
+      this.$nextTick(() => {
+        this.$refs['content'].$el.scrollTop = 0
+      })
     }
   },
   mounted() {
