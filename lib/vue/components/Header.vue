@@ -118,7 +118,7 @@ header {
 .logo {
   max-width: calc(100% - 40px);
   height: 60px;
-  color: #161617;
+  color: #000;
   font-weight: 900;
   font-size: 20px;
   cursor: pointer;

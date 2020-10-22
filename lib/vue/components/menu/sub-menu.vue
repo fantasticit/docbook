@@ -5,7 +5,12 @@
       <template v-if="submenu.children">
           <SubMenu :key="submenu.path + '-' + i" :menu="submenu" />
         </template>
-        <el-menu-item v-else :key="submenu.path + '-' + i" :index="submenu.path">
+        <el-menu-item
+          v-else
+          :key="submenu.path + '-' + i" 
+          :index="submenu.path"
+          :class="{'is-active': isActive(menu.path)}"
+        >
           <a v-if="isOutLink(submenu.path)" :href="submenu.path" target="_blank">{{ submenu.title }}</a>
           <router-link v-else :to="submenu.path">{{ submenu.title }}</router-link>
         </el-menu-item>
@@ -25,6 +30,12 @@ export default {
   methods: {
     isOutLink(link) {
       return /^http/.test(link)
+    },
+    isActive(input) {
+      const paths = Array.isArray(input) ? input : [input];
+      return paths.some(path => {
+        return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+      })
     }
   }
 }

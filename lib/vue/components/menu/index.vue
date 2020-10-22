@@ -1,10 +1,15 @@
 <template>
-  <el-menu :default-active="$route.path" :mode="mode" :class="'el-menu-' + mode" router="true">
+  <el-menu :mode="mode" :default-active="$route.path" :class="'el-menu-' + mode" router="true">
     <template v-for="(menu, i) in menus.filter(menu => menu.title && menu.path)">
       <template v-if="menu.children">
         <SubMenu :key="menu.path + '-' + i" :menu="menu" />
       </template>
-      <el-menu-item v-else :key="menu.path + '-' + i" :index="isOutLink(menu.path) ? '' : menu.path">
+      <el-menu-item 
+        v-else
+        :key="menu.path + '-' + i" 
+        :index="isOutLink(menu.path) ? '' : menu.path"
+        :class="{'is-active': isActive(menu.path)}"
+      >
         <a v-if="isOutLink(menu.path)" :href="menu.path" target="_blank">{{ menu.title }}</a>
         <router-link v-else :to="menu.path">{{ menu.title }}</router-link>
       </el-menu-item>
@@ -23,6 +28,12 @@ export default {
   methods: {
     isOutLink(link) {
       return /^http/.test(link)
+    },
+    isActive(input) {
+      const paths = Array.isArray(input) ? input : [input];
+      return paths.some(path => {
+        return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+      })
     }
   }
 }

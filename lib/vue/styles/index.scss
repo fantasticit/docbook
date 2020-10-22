@@ -60,4 +60,16 @@ button {
   .el-menu-item > a {
     display: block;
   }
+
+  .el-menu--horizontal > .el-menu-item.is-active {
+    border-bottom-color: #000 !important;
+  }
+
+  .el-menu-item.is-active {
+    font-weight: 600;
+  }
+
+  .el-tabs__nav-scroll {
+    padding: 0 20px;
+  }
 }
