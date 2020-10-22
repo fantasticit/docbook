@@ -118,8 +118,10 @@ header {
 .logo {
   max-width: calc(100% - 40px);
   height: 60px;
-  font-size: 1.1em;
-  font-weight: 600;
+  color: #161617;
+  font-weight: 900;
+  font-size: 20px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
 }
