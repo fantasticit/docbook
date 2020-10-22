@@ -45,7 +45,6 @@ export default {
       }
 
       traverse(this.routes)
-      console.log(ret)
       return ret
     },
   },
