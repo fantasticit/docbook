@@ -1,6 +1,6 @@
 {
   "name": "@fantasticit/docbook",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "A lib for build doc site",
   "bin": {
     "docbook": "./bin/cli.js"
