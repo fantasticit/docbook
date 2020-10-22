@@ -71,3 +71,4 @@ tslint.json
 *.un~
 *.vscode
 
+/docs/.docbook

@@ -23,7 +23,17 @@
         </el-tooltip>
       </div>
       <div class="bock-demo__code">
-        <textarea ref="textarea"></textarea>
+        <el-tabs v-model="activeTab" :before-leave="checkAndInitEditor">
+          <el-tab-pane label="HTML" name="html">
+            <textarea ref="htmlTextarea"></textarea>
+          </el-tab-pane>
+          <el-tab-pane label="CSS" name="css">
+            <textarea ref="cssTextarea"></textarea>
+          </el-tab-pane>
+           <el-tab-pane label="JavaScript" name="js">
+            <textarea ref="jsTextarea"></textarea>
+          </el-tab-pane>
+        </el-tabs>
       </div>
     </div>
     <textarea ref="copytxt" class="copytxt"></textarea>
@@ -34,20 +44,27 @@ import CodeMirror from 'codemirror'
 import Split from 'split.js'
 import { unescape } from 'scapegoat'
 import 'codemirror/mode/htmlmixed/htmlmixed'
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/mode/css/css'
 import 'codemirror/lib/codemirror.css'
 import { throttle } from '../utils/throttle'
 
 export default {
   props: {
     tip: String,
-    source: String
+    html: String,
+    css: String,
+    js: String,
   },
 
   data () {
     return {
-      editor: null,
-      visible: true,
+      activeTab: 'js',
+      htmlEditor: null,
+      cssEditor: null,
+      jsEditor: null,
 
+      visible: true,
       isJSON: false,
       isFullscreen: false,
       showEditor: true
@@ -65,7 +82,8 @@ export default {
     this.isFullscreen = tip.indexOf('fullscreen') > -1
       ; (this.showEditor = innerWidth >= 768) && this.initSplit()
 
-    this.initEditor()
+    this.jsEditor = this.initEditor('jsTextarea', 'application/javascript', this.js)
+
     try {
       this.$nextTick(() => {
         this.syncCode()
@@ -102,9 +120,9 @@ export default {
       })
     },
 
-    initEditor () {
-      this.editor = CodeMirror.fromTextArea(this.$refs['textarea'], {
-        mode: 'application/javascript',
+    initEditor (ref, mode = 'application/javascript', toSetValue) {
+      const editor = CodeMirror.fromTextArea(this.$refs[ref], {
+        mode: mode,
         extraKeys: {
           'Ctrl-Space': 'autocomplete'
         },
@@ -113,8 +131,24 @@ export default {
         lineNumbers: true,
         lineWrapping: false
       })
+      editor.getDoc().setValue(this.unescape(toSetValue))
+      return editor
+    },
 
-      this.editor.getDoc().setValue(this.unescape(this.source))
+    checkAndInitEditor(to) {
+      this.$nextTick(() => {
+         switch (to) {
+          case 'js':
+            !this.jsEditor && (this.jsEditor = this.initEditor('jsTextarea', 'application/javascript', this.js));
+            break;
+          case 'css':
+            !this.cssEditor && (this.cssEditor = this.initEditor('cssTextarea', 'text/css', this.css));
+            break;
+          case 'html':
+            !this.htmlEditor && (this.htmlEditor = this.initEditor('htmlTextarea', 'text/html', this.html));
+            break;
+        }
+      })
     },
 
     syncCode () {
@@ -127,9 +161,11 @@ export default {
         return a
       }, ``) : ''
       iframe.contentWindow.document.write(
-        `<div id="app" style="width: 100%; height: 100%; overflow: hidden"><\/div>
+        `
+        <style>${this.cssEditor ? this.cssEditor.getValue() : this.css}<\/style>
+        ${this.htmlEditor ? this.htmlEditor.getValue(): this.html}
         ${srcs}
-        <script>${this.editor.getValue()}<\/script>
+        <script>${this.jsEditor ? this.jsEditor.getValue() : this.js}<\/script>
         `
       )
     },
@@ -211,6 +247,8 @@ export default {
 }
 
 .bock-demo__ctrl {
+  position: relative;
+  z-index: 1000000;
   height: 45px;
   padding: 0 15px;
   border-bottom: 1px solid #ddd;
@@ -243,9 +281,10 @@ export default {
 }
 
 .CodeMirror {
-  height: 100% !important;
+  height: 300px !important;
   font-family: Menlo, Monaco, Consolas, Courier, monospace;
   font-size: 14px;
+  background: transparent !important;
 }
 .CodeMirror-gutters {
   background-color: #f7f9fb;

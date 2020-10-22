@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  title: "首页",
   methods: {
     go() {
       this.$router.push('/doc')

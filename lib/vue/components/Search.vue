@@ -29,16 +29,23 @@ export default {
     },
     pages() {
       const ret = []
+      const has = []
       const traverse = (routes) => {
         return routes.forEach(route => {
-          ret.push(route)
+          const key = route.title
+          if (!has.includes(key)) {
+            ret.push(route)
+            has.push(key)
+          }
 
           if (Array.isArray(route.children)) {
             traverse(route.children)
           }
         })
       }
+
       traverse(this.routes)
+      console.log(ret)
       return ret
     },
   },

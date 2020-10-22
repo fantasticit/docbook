@@ -2,14 +2,17 @@
   <header>
     <el-row>
       <!-- S 移动端菜单按钮 -->
-      <el-col :xs="4" class="hidden-sm-and-up">
+      <!-- <el-col :xs="4" class="hidden-sm-and-up">
         <button @click="toggleShowMenu" class="mobile-menu-btn">
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg>
         </button>
-      </el-col>
+      </el-col> -->
       <!-- E 移动端菜单按钮 -->
 
-      <el-col :xs="8" :sm="4">
+      <el-col :xs="12" :sm="4">
+        <button @click="toggleShowMenu" class="hidden-sm-and-up mobile-menu-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg>
+        </button>
         <router-link class="logo" to="/">
           <div v-html="logo"></div>
         </router-link>
@@ -113,7 +116,7 @@ header {
 }
 
 .logo {
-  width: 10rem;
+  max-width: calc(100% - 40px);
   height: 60px;
   font-size: 1.1em;
   font-weight: 600;
@@ -130,13 +133,12 @@ nav {
   .el-menu-horizontal {
     border-bottom: 0;
   }
-
 }
 
 .mobile-menu-btn {
   border: 0;
   font-size: 1.5em;
-  margin-top: 17px;
+  transform: translateY(4px);
   background: transparent;
   cursor: pointer;
 

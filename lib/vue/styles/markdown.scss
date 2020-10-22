@@ -4,29 +4,29 @@
 }
 
 .markdown-content {
-  h2:first-child {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-    font-size: 32px;
-    font-weight: 400;
-    color: rgba(77, 78, 82, 1);
-    line-height: 46px;
-    border-bottom: 0;
-  }
+  // h2:first-child {
+  //   display: flex;
+  //   align-items: center;
+  //   padding: 0;
+  //   margin: 0;
+  //   font-size: 32px;
+  //   font-weight: 400;
+  //   color: rgba(77, 78, 82, 1);
+  //   line-height: 46px;
+  //   border-bottom: 0;
+  // }
 
-  h2:first-child::before {
-    content: '';
-    display: inline-block;
-    background: #1979ff;
-    height: 32px;
-    width: 5px;
-    line-height: 46px;
-    margin-right: 9px;
-    margin-top: 0;
-    visibility: visible;
-  }
+  // h2:first-child::before {
+  //   content: '';
+  //   display: inline-block;
+  //   background: #1979ff;
+  //   height: 32px;
+  //   width: 5px;
+  //   line-height: 46px;
+  //   margin-right: 9px;
+  //   margin-top: 0;
+  //   visibility: visible;
+  // }
 
   tbody {
     tr {
