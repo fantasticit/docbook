@@ -25,6 +25,12 @@ export default {
   components: {
     SubMenu
   },
+  created () {
+    this.$router.beforeEach((to, from, next) => {
+      this.$forceUpdate()
+      next()
+    })
+  },
   methods: {
     isOutLink(link) {
       return /^http/.test(link)
