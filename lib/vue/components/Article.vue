@@ -69,6 +69,7 @@ export default {
 .sider-menu {
   height: 100%;
   border-right: 1px solid #e8e8e8;
+  overflow: auto;
 }
 
 .menu-btn {
