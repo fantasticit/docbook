@@ -5,6 +5,8 @@
 `docbook` 致力于静态文档站快速生成。
 
 - 强约定使用 `docs` 下文件生成文档
+- 默认支持 `Service Work`
+- 支持 `PWA`，通过 `config.manifest` 配置
 
 ## 安装
 
@@ -43,6 +45,7 @@ npm i -D @fantasticit/docbook
 - `toc`: 是否为文章开启目录
 - `navs`: 文档站头部导航，形如：`[{title: '首页', path: '/home' },]`
 - `renderFooter`: 正文底部渲染函数，注意类型是函数，不配置不渲染底部
+- `manifest`: PWA manifest 清单配置（_请将资源放置在 `docs/assets` 内_）
 
 开发配置：
 

@@ -15,6 +15,7 @@ index: 4
 - `toc`: 是否为文章开启目录
 - `navs`: 文档站头部导航，形如：`[{title: '首页', path: '/home' },]`
 - `renderFooter`: 正文底部渲染函数，注意类型是函数，不配置不渲染底部
+- `manifest`: PWA manifest 清单配置（_请将资源放置在 `docs/assets` 内_）
 
 开发配置：
 
@@ -48,5 +49,40 @@ export default {
   ],
   renderFooter: (buildTime, relativeFilePath) =>
     `Bulid at ${buildTime}, Modify on <a href="https://github.com/fantasticit/docbook/tree/main${relativeFilePath}" target="_blank">Github</a>`,
+  manifest: {
+    name: 'Docbook',
+    short_name: '静态文档生成',
+    display: 'standalone',
+    start_url: '/',
+    theme_color: '#000',
+    background_color: '#000',
+    icons: [
+      {
+        src: 'assets/doc16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      {
+        src: 'assets/doc32.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        src: 'assets/doc48.png',
+        sizes: '48x48',
+        type: 'image/png',
+      },
+      {
+        src: 'assets/doc64.png',
+        sizes: '64x64',
+        type: 'image/png',
+      },
+      {
+        src: 'assets/doc128.png',
+        sizes: '128x128',
+        type: 'image/png',
+      },
+    ],
+  },
 };
 ```
