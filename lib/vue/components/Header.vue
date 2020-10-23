@@ -150,7 +150,7 @@ nav {
   left: -1rem;
   z-index: 1000;
   transform: translateY(-100%);
-  padding: 0 calc(1rem + 6px) 1.5rem;
+  padding-bottom: 1.5rem;
   width: 100vw;
   flex-wrap: wrap;
   flex-direction: column-reverse;
