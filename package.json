@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "docbook dev",
-    "build": "yarn add -D @fantasticit/docbook@latest && docbook build"
+    "build": "docbook build"
   },
   "author": "fantasticit",
   "license": "MIT",
@@ -66,7 +66,7 @@
     "scapegoat": "^1.0.0",
     "split.js": "^1.5.10",
     "style-loader": "^0.23.1",
-    "terser-webpack-plugin": "^2.1.0",
+    "terser-webpack-plugin": "4",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^1.1.2",
     "uslug": "^1.0.4",
