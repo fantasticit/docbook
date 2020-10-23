@@ -167,15 +167,20 @@ export default {
   left: 0;
   top: 10px;
   z-index: 1000;
+  width: 24px;
+  height: 24px;
   background: #fff;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 0 4px 4px 0;
   border: 0;
-  font-size: 1.2em;
-  padding-top: 6px;
+  padding-top: 3px;
   outline: none;
   transition: left .3s ease-in-out;
   transition-delay: .3s;
+
+  svg {
+    transform: translateX(-50%);
+  }
 }
 
 .markdown-container {
@@ -210,7 +215,7 @@ export default {
 
       > div {
         position: relative;
-        width: 45%;
+        width: 40%;
         padding: 8px;
         border: 1px solid rgb(230, 236, 241);
         border-radius: 3px;
