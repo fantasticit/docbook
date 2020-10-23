@@ -117,12 +117,22 @@ export default {
       const currentPath = this.$route.path
       const routes = this.$router.options.routes
       let currentPathIndex = -1
+      let parent = null
 
-      const parent = routes.find(route => {
-        if (!route.children) return false
-        currentPathIndex = route.children.findIndex(item => item.path === currentPath)
-        return currentPathIndex > -1
-      })
+      const find = (routes) => {
+        return routes.forEach(route => {
+           if (!route.children) return 
+          let idx = route.children.findIndex(item => item.path === currentPath)
+          if (idx > -1) {
+            currentPathIndex = idx
+            parent = route
+          } else {
+            find(route.children)
+          }
+        })
+      }
+
+      find(routes)
 
       if (currentPathIndex > -1) {
         this.current = parent.children[currentPathIndex]
