@@ -2,8 +2,6 @@
 
 [website](https://docbook.vercel.app/)
 
-<img src="./assets/doc.png" width="50%">
-
 `docbook` 致力于静态文档站快速生成。
 
 - 零配置撰写文档站，无需关心 webpack 配置
