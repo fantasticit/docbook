@@ -27,12 +27,10 @@ export default {
     "start_url" : "/" , 
     "theme_color" : "#000" , 
     "background_color" : "#000" , 
-    "icons" : [
-      {
-        "src": "assets/doc144.png",
-        "sizes": "144x144",
-        "type": "image/png"
-      }
-    ]
+    "icons" : [72, 96, 120, 128, 144, 152, 180, 192, 384, 512].map(s => ({
+      "src": `assets/icon${s}.png`,
+      "sizes": `${s}x${s}`,
+      "type": "image/png"
+    }))
   }
 }

@@ -4,17 +4,20 @@
       <Menu :menus="routes" mode="vertical" />
     </el-col>
 
-    <button :class="{ 'is-show': showMenu, 'menu-btn': 1 }" @click="toggleShowMenu">
-      <svg
-        viewBox="0 0 1024 1024"
+    <button  :class="{ 'is-show': showMenu, 'menu-btn': 1 }" @click="toggleShowMenu">
+
+      <i class="el-icon-menu"></i>
+      <!-- <svg -->
+        <!-- viewBox="0 0 1024 1024"
         data-icon="bars"
-        width="1em"
-        height="1em"
+        width="16"
+        height="16"
         fill="currentColor"
         aria-hidden="true"
+        :class="{ 'is-show': showMenu, 'menu-btn': 1 }" @click="toggleShowMenu"
       >
         <path d="M912 192H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM104 228a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm0 284a56 56 0 1 0 112 0 56 56 0 1 0-112 0zm0 284a56 56 0 1 0 112 0 56 56 0 1 0-112 0z"></path>
-      </svg>
+      </svg> -->
     </button>
 
     <el-col :xs="24" :sm="20" class="markdown-container" ref="content">
@@ -169,18 +172,13 @@ export default {
   z-index: 1000;
   width: 24px;
   height: 24px;
+  padding: 0 4px;
   background: #fff;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-  border-radius: 0 4px 4px 0;
   border: 0;
-  padding-top: 3px;
   outline: none;
   transition: left .3s ease-in-out;
   transition-delay: .3s;
-
-  svg {
-    transform: translateX(-50%);
-  }
 }
 
 .markdown-container {
