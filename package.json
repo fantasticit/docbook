@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "docbook dev",
-    "build": "docbook build"
+    "build": "yarn add -D @fantasticit/docbook@latest && docbook build"
   },
   "author": "fantasticit",
   "license": "MIT",
