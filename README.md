@@ -9,15 +9,15 @@
 - 零配置撰写文档站，无需关心 webpack 配置
 - 强约定使用 `docs` 下文件生成文档
 
-### 安装
+## 安装
 
-#### 全局安装
+### 全局安装
 
 ```shell
 npm i -g @fantasticit/docbook
 ```
 
-#### 项目中使用
+### 项目中使用
 
 ```shell
 npm i -D @fantasticit/docbook
@@ -34,14 +34,58 @@ npm i -D @fantasticit/docbook
 
 执行 `npm run doc:dev` 即可打开文档站。
 
-[注意] 需要在 `docs` 内编写 `config.js`，具体配置如下：
+## 配置
+
+通过 `docs/config.js` 指定文档配置。
 
 - `icon`: favicon 配置
 - `title`: 文档站标题
 - `logo`: Logo 配置，支持 HTML 字符串
-- `js`: 需要额外注入的 js 资源地址，形如：`["https://www.qcharts.cn/qcharts.js"]`
+- `github`: github 地址，配置后将在网页右上角添加 github 图标
+- `js`: 需要额外注入的 js 资源地址，形如：`["https://www.qcharts.cn/qcharts.js"]`，同时注入到编辑器，编辑器中也可使用
+- `toc`: 是否为文章开启目录
 - `navs`: 文档站头部导航，形如：`[{title: '首页', path: '/home' },]`
-- `routes`: `vue-router` 路由配置
+- `renderFooter`: 正文底部渲染函数，注意类型是函数，不配置不渲染底部
+
+开发配置：
+
 - `port`: 本地开发端口，默认 `9090`
 - `debug`: 是否开启调试模式，默认 `false`
 - `outputDir`: 文档编译输出目录，默认 `docs-build`
+
+## 文档撰写
+
+`docbook` 支持 `.vue` 和 `.md` 两种格式文档。支持属性如下：
+
+- `title`: 文件名称配置，字符串
+- `index`: 文件索引，数字
+
+### `.vue` 格式
+
+在 vue 文件 `script` 部分添加 `title` 和 `index` 属性配置形如：
+
+```vue
+<template></template>
+
+<script>
+export default {
+  title: '文档',
+  index: 0,
+};
+</script>
+
+<style lang="scss" scoped></style>
+```
+
+### `.md` 格式
+
+在 md 文件中添加 `title` 和 `index` 属性配置形如：
+
+```md
+---
+title: '文档'
+index: 1
+---
+
+<!-- 以下为正文 -->
+```
