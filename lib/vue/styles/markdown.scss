@@ -152,7 +152,7 @@
     white-space: pre;
     overflow: auto;
     padding: 1.5rem;
-    margin: 40px 0px;
+    margin: 16px 0px;
     border-radius: 3px;
   }
 
@@ -171,17 +171,19 @@
 
   li code,
   p code {
-    color: rgb(212, 0, 255);
     font-size: 0.875em;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
     white-space: pre-wrap;
+    background-color: rgba(27, 31, 35, 0.05);
 
-    &::before {
-      content: '`';
-    }
+    // &::before {
+    //   content: '`';
+    // }
 
-    &::after {
-      content: '`';
-    }
+    // &::after {
+    //   content: '`';
+    // }
   }
 
   img {

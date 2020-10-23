@@ -32,7 +32,8 @@ a {
   word-break: keep-all;
 
   &:hover {
-    color: #0074de;
+    color: #000;
+    font-weight: 600;
   }
 }
 
@@ -136,14 +137,14 @@ button {
           width: 1px;
           left: 0;
           height: 16px;
-          // background-color: rgb(230, 236, 241);
         }
 
         &.router-link-exact-active {
-          color: #0074de;
+          color: #000;
+          font-weight: 600;
 
           &::before {
-            background-color: #0074de;
+            background-color: #000;
           }
         }
       }

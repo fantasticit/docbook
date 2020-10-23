@@ -193,7 +193,7 @@ export default {
 
     .toc-container {
       position: fixed;
-      top: 80px;
+      top: 90px;
       right: 40px;
       margin-left: 20px;
       transform: translateX(100%);

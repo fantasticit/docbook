@@ -174,14 +174,12 @@ export default {
 <style lang="scss">
 .block-demo {
   position: relative;
-  margin-top: 1.2em;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   border: 1px solid #edeff1;
   background: #fff;
-
   font-size: 1.2rem;
 }
 

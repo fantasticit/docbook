@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "docbook dev",
-    "build": "docbook build"
+    "build": "yarn add -D @fantasticit/docbook@latest && docbook build"
   },
   "author": "fantasticit",
   "license": "MIT",
@@ -81,7 +81,5 @@
     "webpack-merge": "^4.1.5",
     "webpack-visualizer-plugin": "^0.1.11"
   },
-  "devDependencies": {
-    "@fantasticit/docbook": "^1.1.2"
-  }
+  "devDependencies": {}
 }
