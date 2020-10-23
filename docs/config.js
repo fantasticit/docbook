@@ -4,6 +4,7 @@ export default {
   port: 4000,
   github: "https://github.com/fantasticit/docbook",
   js: ["https://s2.ssl.qhres.com/!f868948f/vue.min.js"],
+  toc: true,
   navs: [
     {
       title: '首页',
