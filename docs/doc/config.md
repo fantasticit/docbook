@@ -12,6 +12,7 @@ index: 4
 - `logo`: Logo 配置，支持 HTML 字符串
 - `github`: github 地址，配置后将在网页右上角添加 github 图标
 - `js`: 需要额外注入的 js 资源地址，形如：`["https://www.qcharts.cn/qcharts.js"]`，同时注入到编辑器，编辑器中也可使用
+- `toc`: 是否为文章开启目录
 - `navs`: 文档站头部导航，形如：`[{title: '首页', path: '/home' },]`
 - `renderFooter`: 正文底部渲染函数，注意类型是函数，不配置不渲染底部
 
@@ -30,6 +31,7 @@ export default {
   port: 4000,
   github: 'https://github.com/fantasticit/docbook',
   js: ['https://s2.ssl.qhres.com/!f868948f/vue.min.js'],
+  toc: true,
   navs: [
     {
       title: '首页',
