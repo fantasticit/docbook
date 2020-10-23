@@ -1,509 +1,330 @@
 .markdown-content {
-  position: relative;
-  padding-bottom: 60px;
-}
+  line-height: 1.6;
+  word-spacing: 0;
+  letter-spacing: 0;
+  word-break: break-word;
+  word-wrap: break-word;
+  text-align: left;
+  font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, PingFang SC, Cambria,
+    Cochin, Georgia, Times, Times New Roman, serif;
+  margin-top: -10px;
 
-.markdown-content {
-  // h2:first-child {
-  //   display: flex;
-  //   align-items: center;
-  //   padding: 0;
-  //   margin: 0;
-  //   font-size: 32px;
-  //   font-weight: 400;
-  //   color: rgba(77, 78, 82, 1);
-  //   line-height: 46px;
-  //   border-bottom: 0;
-  // }
-
-  // h2:first-child::before {
-  //   content: '';
-  //   display: inline-block;
-  //   background: #1979ff;
-  //   height: 32px;
-  //   width: 5px;
-  //   line-height: 46px;
-  //   margin-right: 9px;
-  //   margin-top: 0;
-  //   visibility: visible;
-  // }
-
-  tbody {
-    tr {
-      td:first-child {
-        font-size: 14px;
-        font-weight: 400;
-        color: rgba(0, 107, 255, 1);
-        line-height: 20px;
-      }
-    }
+  p {
+    font-size: 16px;
+    color: #000;
   }
-}
 
-.markdown-content .demo-menu {
-  display: flex;
-  border-bottom: 2px solid #f5f5f5;
-  list-style: none;
-  padding: 0 !important;
-  margin-bottom: 1.4em;
-  overflow-x: auto;
-  overflow-y: hidden;
+  p {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
+    line-height: 26px;
+  }
 
-  li + li {
-    margin-left: 1rem;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5,
+  h6 {
+    font-size: 16px;
+  }
+
+  ol,
+  ul {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 25px;
+    color: #000;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ul ul {
+    list-style-type: square;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li section {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 26px;
+    text-align: left;
+    color: #010101;
+    font-weight: 500;
+  }
+
+  blockquote {
+    display: block;
+    font-size: 0.9em;
+    overflow: auto;
+    border-left: 3px solid rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.05);
+    color: #6a737d;
+    padding: 10px 10px 10px 20px;
+    margin: 20px 0;
+  }
+
+  blockquote p {
+    margin: 0;
+    color: #000;
+    line-height: 26px;
+  }
+
+  .table-of-contents a {
+    border: none;
+    color: #000;
+    font-weight: 400;
   }
 
   a {
-    display: inline-block;
-    padding: 0.5em 1em;
-    word-break: keep-all;
+    color: #0074de;
+    text-decoration: none;
+    font-size: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  a.router-link-active {
-    border-bottom: 2px solid #3273dc;
-    color: #3273dc !important;
-  }
-}
-
-.markdown-content table {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: #fff;
-  color: #5e6d82;
-  font-size: 14px;
-  margin-top: 30px;
-  margin-bottom: 45px;
-  line-height: 1.5em;
-  overflow: auto;
-}
-
-.markdown-content table strong {
-  font-weight: 500;
-}
-
-.markdown-content table th {
-  text-align: left;
-  border-top: 1px solid #eaeefb;
-  background-color: #eff2f7;
-  white-space: nowrap;
-}
-
-.markdown-content table td,
-.markdown-content table th {
-  border-bottom: 1px solid #eaeefb;
-  padding: 10px;
-  max-width: 250px;
-}
-
-.markdown-content table th:first-child,
-.markdown-content table td:first-child {
-  padding-left: 10px;
-}
-
-.markdown-content pre {
-  color: #525252;
-  overflow: auto;
-}
-.markdown-content pre .function .keyword,
-.markdown-content pre .constant {
-  color: #0092db;
-}
-.markdown-content pre .keyword,
-.markdown-content pre .attribute {
-  color: #e96900;
-}
-.markdown-content pre .number,
-.markdown-content pre .literal {
-  color: #ae81ff;
-}
-.markdown-content pre .tag,
-.markdown-content pre .tag .title,
-.markdown-content pre .change,
-.markdown-content pre .winutils,
-.markdown-content pre .flow,
-.markdown-content pre .lisp .title,
-.markdown-content pre .clojure .built_in,
-.markdown-content pre .nginx .title,
-.markdown-content pre .tex .special {
-  color: #2973b7;
-}
-.markdown-content pre .class .title {
-  color: #fff;
-}
-.markdown-content pre .symbol,
-.markdown-content pre .symbol .string,
-.markdown-content pre .value,
-.markdown-content pre .regexp {
-  color: #42b983;
-}
-.markdown-content pre .title {
-  color: #a6e22e;
-}
-.markdown-content pre .tag .value,
-.markdown-content pre .string,
-.markdown-content pre .subst,
-.markdown-content pre .haskell .type,
-.markdown-content pre .preprocessor,
-.markdown-content pre .ruby .class .parent,
-.markdown-content pre .built_in,
-.markdown-content pre .sql .aggregate,
-.markdown-content pre .django .template_tag,
-.markdown-content pre .django .variable,
-.markdown-content pre .smalltalk .class,
-.markdown-content pre .javadoc,
-.markdown-content pre .django .filter .argument,
-.markdown-content pre .smalltalk .localvars,
-.markdown-content pre .smalltalk .array,
-.markdown-content pre .attr_selector,
-.markdown-content pre .pseudo,
-.markdown-content pre .addition,
-.markdown-content pre .stream,
-.markdown-content pre .envvar,
-.markdown-content pre .apache .tag,
-.markdown-content pre .apache .cbracket,
-.markdown-content pre .tex .command,
-.markdown-content pre .prompt {
-  color: #42b983;
-}
-.markdown-content pre .comment,
-.markdown-content pre .java .annotation,
-.markdown-content pre .python .decorator,
-.markdown-content pre .template_comment,
-.markdown-content pre .pi,
-.markdown-content pre .doctype,
-.markdown-content pre .deletion,
-.markdown-content pre .shebang,
-.markdown-content pre .apache .sqbracket,
-.markdown-content pre .tex .formula {
-  color: #b3b3b3;
-}
-.markdown-content a {
-  text-decoration: none;
-  color: #34495e;
-}
-.markdown-content img {
-  border: none;
-}
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3,
-.markdown-content h4,
-.markdown-content strong {
-  font-weight: 600;
-  color: #2c3e50;
-}
-.markdown-content code,
-.markdown-content pre {
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
-  font-size: 0.9em;
-  background-color: #f8f8f8;
-  -webkit-font-smoothing: initial;
-  -moz-osx-font-smoothing: initial;
-}
-.markdown-content code {
-  color: #476582;
-  padding: 0.25rem 0.5rem;
-  margin: 0;
-  font-size: 0.85em;
-  background-color: rgba(27, 31, 35, 0.05);
-  border-radius: 3px;
-}
-
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3,
-.markdown-content h4,
-.markdown-content h5,
-.markdown-content h6 {
-  margin-top: -3.1rem;
-  padding-top: 4.6rem;
-  margin-bottom: 0.85rem;
-}
-
-.markdown-content h1 {
-  font-size: 1.8rem;
-}
-
-.markdown-content h2 {
-  padding-bottom: 0.7em;
-  border-bottom: 1px solid #ddd;
-}
-.markdown-content h3 {
-  line-height: 1.5;
-  position: relative;
-}
-
-.markdown-content h2,
-.markdown-content h3 {
-  pointer-events: none;
-}
-.markdown-content h2 a,
-.markdown-content h3 a,
-.markdown-content h2 button,
-.markdown-content h3 button {
-  pointer-events: auto;
-  color: #2c3e50;
-}
-.markdown-content h2:before,
-.markdown-content h3:before {
-  content: '';
-  display: block;
-  margin-top: -91px;
-  height: 91px;
-  visibility: hidden;
-}
-
-.markdown-content h3 > a:before {
-  content: '#';
-  color: #42b983;
-  position: absolute;
-  left: -0.7em;
-  margin-top: -0.05em;
-  padding-right: 0.5em;
-  font-size: 1.2em;
-  line-height: 1;
-  font-weight: bold;
-}
-
-.markdown-content h1 code,
-.markdown-content h2 code,
-.markdown-content h3 code,
-.markdown-content h4 code,
-.markdown-content h5 code,
-.markdown-content h6 code {
-  color: #e96900;
-}
-.markdown-content pre code {
-  // color: #fff;
-  padding: 0;
-  background-color: transparent;
-  border-radius: 0;
-}
-.markdown-content em {
-  color: #7f8c8d;
-}
-.markdown-content p {
-  word-spacing: 0.05em;
-  font-size: 14px;
-  color: #5e6d82;
-  line-height: 1.5em;
-}
-.markdown-content a.button {
-  padding: 0.75em 2em;
-  border-radius: 2em;
-  display: inline-block;
-  color: #fff;
-  background-color: #4fc08d;
-  transition: all 0.15s ease;
-  box-sizing: border-box;
-  border: 1px solid #4fc08d;
-}
-.markdown-content sup.beta.beta {
-  font-size: 0.6em;
-  margin-left: 0.7em;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-@media print {
-  .markdown-content body {
+  strong {
+    font-weight: 700;
     color: #000;
   }
-  .markdown-content .highlight {
-    padding: 0;
-    page-break-inside: avoid;
-  }
-  .markdown-content .highlight .code pre {
+
+  em {
+    font-style: italic;
     color: #000;
+  }
+
+  em strong {
+    font-weight: 700;
+    color: #000;
+  }
+
+  del {
+    font-style: italic;
+    color: #000;
+  }
+
+  hr {
+    height: 1px;
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #000;
+  }
+
+  pre {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+    white-space: pre;
+    overflow: auto;
+    padding: 1.5rem;
+    margin: 40px 0px;
+    border-radius: 3px;
+  }
+
+  pre code {
+    position: relative;
+    display: block;
+    font-family: Operator Mono, Consolas, Monaco, Menlo, monospace;
+    border-radius: 0;
+    font-size: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre code span {
+    line-height: 26px;
+  }
+
+  li code,
+  p code {
+    color: rgb(212, 0, 255);
+    font-size: 0.875em;
+    white-space: pre-wrap;
+
+    &::before {
+      content: '`';
+    }
+
+    &::after {
+      content: '`';
+    }
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+
+  figure {
+    margin: 10px 0;
+  }
+
+  figcaption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+  }
+
+  table {
+    display: table;
+    text-align: left;
+  }
+
+  tbody {
+    border: 0;
+  }
+
+  table tr {
+    border: 0;
+    border-top: 1px solid #ccc;
     background-color: #fff;
-    border-style: solid;
-    border-width: 2px 2px 2px 2px;
-    border-color: #e8e8e8;
-    page-break-inside: avoid;
   }
-  .markdown-content h1,
-  .markdown-content h2,
-  .markdown-content h3,
-  .markdown-content h4,
-  .markdown-content h5 {
-    color: #000;
-    page-break-after: avoid;
-    page-break-before: avoid;
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
   }
-  .markdown-content img {
-    page-break-inside: avoid;
+
+  table tr td,
+  table tr th {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    text-align: left;
   }
-  .markdown-content h2 + p {
-    page-break-before: avoid;
+
+  table tr th {
+    font-weight: 700;
+    background-color: #f0f0f0;
   }
-  .markdown-content a:link:after,
-  .markdown-content a:visited:after {
-    content: ' [' attr(href) '] ';
+
+  sub,
+  sup {
+    line-height: 0;
   }
-}
-.markdown-content img {
-  max-width: 100%;
-}
-.markdown-content span.light {
-  color: #7f8c8d;
-}
-.markdown-content span.info {
-  font-size: 0.85em;
-  display: inline-block;
-  vertical-align: middle;
-  width: 280px;
-  margin-left: 20px;
-}
 
-.markdown-content figure {
-  margin: 1.2em 0;
-}
-
-.markdown-content ul,
-.markdown-content ol {
-  line-height: 1.6em;
-  margin: 1.2em 0 -1.2em;
-  padding-bottom: 1.2em;
-  position: relative;
-  z-index: 1;
-  list-style-type: disc;
-}
-.markdown-content ul,
-.markdown-content ol {
-  padding-left: 1.5em;
-  position: inherit;
-}
-.markdown-content a.anchor {
-  display: block;
-  position: relative;
-  visibility: hidden;
-  height: 60px;
-}
-.markdown-content p a {
-  color: #42b983;
-  font-weight: 500;
-}
-.markdown-content blockquote {
-  padding: 8px 16px;
-  background-color: #ecf8ff;
-  border-radius: 4px;
-  border-left: 5px solid #50bfff;
-  margin: 20px 0;
-}
-
-.markdown-content blockquote.warning {
-  background-color: rgba(255, 229, 100, 0.3);
-  border-color: #e7c000;
-  color: #6b5900;
-}
-
-.markdown-content blockquote p {
-  margin: 1rem 0;
-}
-
-.markdown-content pre {
-  position: relative;
-  font-family: 'Roboto Mono', Monaco, courier, monospace;
-  font-size: 0.9em;
-  background-color: #f8f8f8;
-  -webkit-font-smoothing: initial;
-  padding: 1.2em 1.4em;
-
-  line-height: 1.4;
-  padding: 1.25rem 1.5rem;
-  margin: 0.85rem 0;
-  // background-color: #282c34;
-  border-radius: 6px;
-  overflow: auto;
-}
-
-/* .markdown-content pre::-webkit-scrollbar {
-  display: none;
-}
-
-.markdown-content pre:hover::-webkit-scrollbar {
-  display: block;
-} */
-
-.markdown-content code::-webkit-scrollbar-track {
-  background: #f8f8f8;
-}
-.markdown-content code.language-go:before,
-.markdown-content code.language-css:before,
-.markdown-content code.language-sql:before,
-.markdown-content code.language-php:before,
-.markdown-content code.language-html:before,
-.markdown-content code.language-json:before,
-.markdown-content code.language-bash:before,
-.markdown-content code.language-less:before,
-.markdown-content code.language-scss:before,
-.markdown-content code.language-nginx:before,
-.markdown-content code.language-javascript:before,
-.markdown-content code.language-typescript:before,
-.markdown-content code.language-shell:before,
-.markdown-content code.language-stylus:before,
-.markdown-content code.language-python:before,
-.markdown-content code.language-nginx:before,
-.markdown-content code.language-json:before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: #ccc;
-  text-align: right;
-  font-size: 0.75em;
-  padding: 5px 10px 0;
-  line-height: 15px;
-  height: 15px;
-  font-weight: 600;
-}
-.markdown-content code.language-go:before {
-  content: 'go';
-}
-.markdown-content code.language-css:before {
-  content: 'css';
-}
-.markdown-content code.language-sql:before {
-  content: 'sql';
-}
-.markdown-content code.language-php:before {
-  content: 'php';
-}
-.markdown-content code.language-bash:before {
-  content: 'bash';
-}
-.markdown-content code.language-less:before {
-  content: 'less';
-}
-.markdown-content code.language-scss:before {
-  content: 'scss';
-}
-.markdown-content code.language-shell:before {
-  content: 'shell';
-}
-.markdown-content code.language-nginx:before {
-  content: 'nginx';
-}
-.markdown-content code.language-stylus:before {
-  content: 'stylus';
-}
-.markdown-content code.language-python:before {
-  content: 'python';
-}
-.markdown-content code.language-html:before {
-  content: 'HTML';
-}
-.markdown-content code.language-javascript:before {
-  content: 'JS';
-}
-.markdown-content code.language-typescript:before {
-  content: 'TS';
-}
-.markdown-content code.language-bash:before {
-  content: 'Shell';
-}
-.markdown-content code.language-css:before {
-  content: 'CSS';
-}
-
-.markdown-content code.language-json:before {
-  content: 'JSON';
+  code::-webkit-scrollbar-track {
+    background: #f8f8f8;
+  }
+  code.language-ts:before,
+  code.language-js:before,
+  code.language-go:before,
+  code.language-css:before,
+  code.language-sql:before,
+  code.language-php:before,
+  code.language-html:before,
+  code.language-json:before,
+  code.language-bash:before,
+  code.language-less:before,
+  code.language-scss:before,
+  code.language-nginx:before,
+  code.language-javascript:before,
+  code.language-typescript:before,
+  code.language-shell:before,
+  code.language-stylus:before,
+  code.language-python:before,
+  code.language-nginx:before,
+  code.language-json:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #ccc;
+    text-align: right;
+    font-size: 0.75em;
+    padding: 5px 10px 0;
+    line-height: 15px;
+    height: 15px;
+    font-weight: 600;
+  }
+  code.language-js:before {
+    content: 'JS';
+  }
+  code.language-ts:before {
+    content: 'TS';
+  }
+  code.language-go:before {
+    content: 'go';
+  }
+  code.language-css:before {
+    content: 'css';
+  }
+  code.language-sql:before {
+    content: 'sql';
+  }
+  code.language-php:before {
+    content: 'php';
+  }
+  code.language-bash:before {
+    content: 'bash';
+  }
+  code.language-less:before {
+    content: 'less';
+  }
+  code.language-scss:before {
+    content: 'scss';
+  }
+  code.language-shell:before {
+    content: 'shell';
+  }
+  code.language-nginx:before {
+    content: 'nginx';
+  }
+  code.language-stylus:before {
+    content: 'stylus';
+  }
+  code.language-python:before {
+    content: 'python';
+  }
+  code.language-html:before {
+    content: 'HTML';
+  }
+  code.language-javascript:before {
+    content: 'JS';
+  }
+  code.language-typescript:before {
+    content: 'TS';
+  }
+  code.language-bash:before {
+    content: 'Shell';
+  }
+  code.language-css:before {
+    content: 'CSS';
+  }
+  code.language-json:before {
+    content: 'JSON';
+  }
 }

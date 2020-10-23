@@ -18,50 +18,121 @@
     </button>
 
     <el-col :xs="24" :sm="20" class="markdown-container" ref="content">
-      <router-view class="markdown-content">
-      </router-view>
-      <el-backtop target=".markdown-container"></el-backtop>
+      <article>
+        <div class="toc-container" :style="{ right: tocRight + 'px' }">
+          <Toc target=".markdown-content" />
+        </div>
+        <router-view class="markdown-content" ref="markdown">
+        </router-view>
+        <div class="navigation-container">
+          <div v-if="prev" class="left" :style="{ width: next ? '45%' : '100%' }">
+            <router-link :to="prev.path">
+              <i class="el-icon-arrow-left"></i>
+              <span>{{ prev.title }}</span>
+            </router-link>
+          </div>
+          <div v-if="next" class="right" :style="{ width: prev ? '45%' : '100%' }">
+            <router-link :to="next.path">
+              <span>{{ next.title }}</span>
+              <i class="el-icon-arrow-right"></i>
+            </router-link>
+          </div>
+        </div>
+        <footer v-if="$config.renderFooter && typeof $config.renderFooter === 'function'">
+          <div v-html="$config.renderFooter($buildTime, current && current.meta && current.meta.location)">
+          </div>
+        </footer>
+        <el-backtop target=".markdown-container"></el-backtop>
+      </article>
+      
     </el-col>
   </el-row>
 </template>
 
 <script>
 import { resolveUrl } from '../utils/resolve-url'
+import { throttle } from '../utils/throttle'
 import Menu from './menu'
+import Toc from './Toc'
 
 export default {
   props: ['parentRoutePath', 'routes'],
   components: {
-    Menu
+    Menu,
+    Toc
   },
   data() {
     return {
+      tocRight: 0,
       showMenu: false,
-      showPath: 'pie'
+      prev: null,
+      current: null,
+      next: null,
     }
   },
   watch: {
-    '$route'() {
+    '$route'(route) {
+      this.calcNavigation()
       this.$nextTick(() => {
-        this.$refs['content'].$el.scrollTop = 0
+        if (route.hash) {
+          document.querySelector(`${route.hash}`).scrollIntoView()
+        } else {
+          this.$refs['content'].$el.scrollTop = 0  
+        }
       })
     }
   },
+  created() {
+    this.calcNavigation()
+  },
   mounted() {
-    const curPath = this.$route.path
-    if (curPath) {
-      this.showPath = curPath.split('/')[2]
+    const hash = this.$route.hash
+
+    if (hash) {
+      this.$nextTick(() => {
+        document.querySelector(`${decodeURIComponent(hash)}`).scrollIntoView()
+      })
     }
+
+    this.calcTocRight()
+    window.addEventListener('resize', this.calcTocRight)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.calcTocRight)
   },
   methods: {
+    calcTocRight() {
+      const el = this.$refs['content'].$el
+      const width = el.offsetWidth
+      const o = (width - 750) / 2 - 20
+      this.tocRight = o > 200 ? o : -1
+    },
     toggleShowMenu() {
       this.showMenu = !this.showMenu
     },
-    menuTitleClick(path) {
-      this.showPath = this.showPath === path ? '/' : path
-    },
     resolveUrl(...args) {
       return resolveUrl(...args)
+    },
+    calcNavigation() {
+      const currentPath = this.$route.path
+      const routes = this.$router.options.routes
+      let currentPathIndex = -1
+
+      const parent = routes.find(route => {
+        if (!route.children) return false
+        currentPathIndex = route.children.findIndex(item => item.path === currentPath)
+        return currentPathIndex > -1
+      })
+
+      if (currentPathIndex > -1) {
+        this.current = parent.children[currentPathIndex]
+        this.prev = parent.children[currentPathIndex - 1]
+        this.next = parent.children[currentPathIndex + 1]
+
+        if (!this.prev.title) {
+          this.prev = null
+        }
+      }
     }
   }
 }
@@ -98,9 +169,79 @@ export default {
 }
 
 .markdown-container {
+  position: relative;
+  z-index: 1;
   height: 100%;
-  padding: 24px 20px 10px 50px;
-  overflow: auto; 
+  overflow: auto;
+  scroll-behavior: smooth;
+
+  > article {
+    position: relative;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px 0 60px;
+
+    .toc-container {
+      position: fixed;
+      top: 80px;
+      right: 40px;
+      margin-left: 20px;
+      transform: translateX(100%);
+    }
+
+    .navigation-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      position: relative;
+      border-top: 1px solid rgba(0,0,0,.07);
+      padding: 40px 0 20px;
+      margin-top: 40px;
+
+      > div {
+        position: relative;
+        width: 45%;
+        padding: 8px;
+        border: 1px solid rgb(230, 236, 241);
+        border-radius: 3px;
+        box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
+        background: #fff;
+
+        > a {
+          display: flex;
+          align-items: center;
+          padding: 1rem .5rem;
+          
+          span {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: calc(100% - 30px);
+          }
+        }
+
+        &.right {
+          text-align: right;
+
+          > a {
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+
+    footer {
+      padding: 20px 0 10px;
+      text-align: center;
+      color: #333;
+      font-size: 1rem;
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 767px) {

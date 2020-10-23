@@ -17,5 +17,6 @@ export default {
       title: "Github",
       path: "https://github.com/fantasticit/docbook"
     }
-  ]
+  ],
+  renderFooter: (buildTime, relativeFilePath) => `Bulid at ${buildTime}, Modify on <a href="https://github.com/fantasticit/docbook/tree/main${relativeFilePath}" target="_blank">Github</a>` 
 }

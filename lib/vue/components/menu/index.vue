@@ -10,8 +10,8 @@
         :index="isOutLink(menu.path) ? '' : menu.path"
         :class="{'is-active': isActive(menu.path)}"
       >
-        <a v-if="isOutLink(menu.path)" :href="menu.path" target="_blank">{{ menu.title }}</a>
-        <router-link v-else :to="menu.path">{{ menu.title }}</router-link>
+        <a v-if="isOutLink(menu.path)" :href="menu.path" target="_blank" :title="menu.title" >{{ menu.title }}</a>
+        <router-link v-else :to="menu.path" :title="menu.title">{{ menu.title }}</router-link>
       </el-menu-item>
     </template> 
   </el-menu>

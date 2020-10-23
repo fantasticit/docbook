@@ -11,8 +11,8 @@
           :index="submenu.path"
           :class="{'is-active': isActive(submenu.path)}"
         >
-          <a v-if="isOutLink(submenu.path)" :href="submenu.path" target="_blank">{{ submenu.title }}</a>
-          <router-link v-else :to="submenu.path">{{ submenu.title }}</router-link>
+          <a v-if="isOutLink(submenu.path)" :title="submenu.title" :href="submenu.path" target="_blank">{{ submenu.title }}</a>
+          <router-link v-else :to="submenu.path" :title="submenu.title">{{ submenu.title }}</router-link>
         </el-menu-item>
     </template>
   </el-submenu>

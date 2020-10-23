@@ -26,10 +26,10 @@ a {
   color: inherit;
   text-decoration: none;
   word-break: keep-all;
-}
 
-a:hover {
-  text-decoration: none !important;
+  &:hover {
+    color: #0074de;
+  }
 }
 
 button {
@@ -58,7 +58,16 @@ button {
   }
 
   .el-menu-item > a {
-    display: block;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      color: inherit;
+    }
   }
 
   .el-menu--horizontal > .el-menu-item.is-active {
@@ -71,5 +80,69 @@ button {
 
   .el-tabs__nav-scroll {
     padding: 0 20px;
+  }
+
+  .toc-container {
+    width: 200px;
+    max-height: 80vh;
+    font-size: 0.8rem;
+    overflow: auto;
+    background-color: #fff;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background-color: rgb(230, 236, 241);
+    }
+
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+
+    ul {
+      position: static;
+      list-style: none;
+      padding-left: 8px;
+      overflow-x: hidden;
+    }
+
+    > div > ul {
+      padding: 0;
+    }
+
+    li {
+      position: static;
+      a {
+        position: static;
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 7px 0 7px 16px;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 1px;
+          left: 0;
+          height: 16px;
+          // background-color: rgb(230, 236, 241);
+        }
+
+        &.router-link-exact-active {
+          color: #0074de;
+
+          &::before {
+            background-color: #0074de;
+          }
+        }
+      }
+    }
   }
 }

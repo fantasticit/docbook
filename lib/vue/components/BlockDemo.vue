@@ -3,24 +3,24 @@
     <div class="preview" ref="preview">
       <div class="demo" ref="demo"></div>
     </div>
-    <div v-show="showEditor" class="editor" ref="editor">
+    <div class="editor" ref="editor">
       <div class="bock-demo__ctrl">
-        <el-tooltip class="item" effect="dark" content="运行" placement="top">
+        <!-- <el-tooltip class="item" effect="dark" content="运行" placement="top"> -->
           <span title="运行" @click="syncCode" class="icon"><img src="./svgs/play.svg" alt="运行" /></span>
-        </el-tooltip>
+        <!-- </el-tooltip> -->
         <template v-if="!isFullscreen">
-          <el-tooltip class="item" effect="dark" content="全屏" placement="top">
+          <!-- <el-tooltip class="item" effect="dark" content="全屏" placement="top"> -->
             <span  title="全屏" @click="fullscreen" class="icon"><img src="./svgs/full-screen.svg" alt="全屏" /></span>
-          </el-tooltip>
+          <!-- </el-tooltip> -->
         </template>
         <template v-if="isFullscreen">
-          <el-tooltip class="item" effect="dark" content="取消全屏" placement="top">
+          <!-- <el-tooltip class="item" effect="dark" content="取消全屏" placement="top"> -->
             <span title="取消全屏" @click="fullscreen" class="icon"><img src="./svgs/recovery.svg" alt="取消全屏" /></span>
-          </el-tooltip>
+          <!-- </el-tooltip> -->
         </template>
-        <el-tooltip class="item" effect="dark" content="复制代码" placement="top">
+        <!-- <el-tooltip class="item" effect="dark" content="复制代码" placement="top">
           <span @click="copyCode" class="icon"><img src="./svgs/code-copy.svg" alt="复制代码" /></span>
-        </el-tooltip>
+        </el-tooltip> -->
       </div>
       <div class="bock-demo__code">
         <el-tabs v-model="activeTab" :before-leave="checkAndInitEditor">
@@ -36,7 +36,7 @@
         </el-tabs>
       </div>
     </div>
-    <textarea ref="copytxt" class="copytxt"></textarea>
+    <!-- <textarea ref="copytxt" class="copytxt"></textarea> -->
   </div>
 </template>
 <script>
@@ -91,22 +91,13 @@ export default {
     } catch (e) {
       throw e
     }
-  },
 
+    window.addEventListener('resize', this.initSplit)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.initSplit)
+  },
   methods: {
-    copyCode () {
-      let val = this.editor.getDoc().getValue();
-      let $text = this.$refs['copytxt'];
-      $text.value = val;
-      $text.focus()
-      $text.select()
-      document.execCommand('copy')
-      this.$notify({
-        title: '成功',
-        message: '复制成功！',
-        type: 'success'
-      });
-    },
     toggle () {
       this.visible = !this.visible
     },
@@ -185,7 +176,6 @@ export default {
   position: relative;
   margin-top: 1.2em;
   box-sizing: border-box;
-  height: 400px;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -204,6 +194,8 @@ export default {
 }
 
 .block-demo button {
+  position: relative;
+  z-index: 9999;
   padding: 0.15rem 0.5rem;
 }
 
@@ -226,11 +218,21 @@ export default {
   box-sizing: border-box;
   width: 50%;
   height: 100%;
+  min-height: 300px;
 }
 
 @media (max-width: 768px) {
-  .block-demo > .preview {
-    width: 100%;
+  .block-demo {
+    flex-direction: column;
+
+    > .editor,
+    > .preview {
+      width: 100% !important;
+    }
+
+    > .preview {
+      min-height: 100px;
+    }
   }
 }
 
@@ -281,7 +283,7 @@ export default {
 }
 
 .CodeMirror {
-  height: 300px !important;
+  height: 298px !important;
   font-family: Menlo, Monaco, Consolas, Courier, monospace;
   font-size: 14px;
   background: transparent !important;
