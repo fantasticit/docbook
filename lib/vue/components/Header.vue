@@ -133,6 +133,7 @@ nav {
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: center;
+  height: 100%;
 
   .el-menu-horizontal {
     border-bottom: 0;
