@@ -23,7 +23,7 @@
       <el-col :xs="0" :sm="20">
         <nav>
           <Search />
-          <div :style="{ marginLeft: '2rem' }">
+          <div :style="{ marginLeft: '2rem', flex: 1 }">
             <Menu :menus="navs" mode="horizontal" />
           </div>
           <template v-if="$config.locales">
@@ -134,6 +134,7 @@ nav {
   justify-content: flex-end;
   align-items: center;
   height: 100%;
+  width: 100%;
 
   .el-menu-horizontal {
     border-bottom: 0;
@@ -192,21 +193,19 @@ nav {
   box-shadow: 0 2px 8px rgba(229, 229, 229, 0.5);
   transition: height ease-in-out 0.3s, width ease-in-out 0.3s, opacity ease-in-out .3s;
 
-  &.is-show {
-    width: 100vw;
-    height: calc(100vh - 61px);
-    opacity: 1;
-    overflow-y: auto;
-  }
-
   .el-menu-vertical {
     border-right: 0;
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .mobile-menu {
-    transform: translateY(-100%) !important;
+    &.is-show {
+      width: 100vw;
+      height: calc(100vh - 61px);
+      opacity: 1;
+      overflow-y: auto;
+    }
   }
 }
 </style>

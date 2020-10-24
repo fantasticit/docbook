@@ -1,6 +1,6 @@
 <template>
   <el-row class="page">
-    <el-col :sm="4" :class="{ 'is-show': showMenu, 'sider-menu': 1 }">
+    <el-col :sm="6" :class="{ 'is-show': showMenu, 'sider-menu': 1 }">
       <Menu :menus="routes" mode="vertical" />
     </el-col>
 
@@ -10,7 +10,7 @@
       <div class="stick"></div>
     </div>
 
-    <el-col :xs="24" :sm="20" class="markdown-container" ref="content">
+    <el-col :xs="24" :sm="18" class="markdown-container" ref="content">
       <article>
         <div v-if="$config.toc" class="toc-container" :style="{ right: tocRight + 'px' }">
           <Toc target=".markdown-content" />
@@ -18,13 +18,13 @@
         <router-view class="markdown-content" ref="markdown">
         </router-view>
         <div class="navigation-container">
-          <div v-if="prev" class="left" :style="{ width: next ? '45%' : '100%' }">
+          <div v-if="prev" class="left" :style="{ width: next ? isMobile ? '40%' : '45%' : '100%' }">
             <router-link :to="prev.path">
               <i class="el-icon-arrow-left"></i>
               <span>{{ prev.title }}</span>
             </router-link>
           </div>
-          <div v-if="next" class="right" :style="{ width: prev ? '45%' : '100%' }">
+          <div v-if="next" class="right" :style="{ width: prev ? isMobile ? '40%' : '45%' : '100%' }">
             <router-link :to="next.path">
               <span>{{ next.title }}</span>
               <i class="el-icon-arrow-right"></i>
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     calcTocRight() {
-      this.isMobile = window.innerWidth <= 768
+      this.isMobile = window.innerWidth < 768
       const el = this.$refs['content'].$el
       const width = el.offsetWidth
       const o = (width - 750) / 2 - 20
@@ -173,7 +173,7 @@ export default {
     position: relative;
     max-width: 750px;
     margin: 0 auto;
-    padding: 20px 0 60px;
+    padding: 10px 1rem 60px;
 
     .toc-container {
       position: fixed;
@@ -238,7 +238,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .menu-btn {
     position: absolute;
     right: 40px;
