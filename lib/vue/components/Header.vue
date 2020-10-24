@@ -3,9 +3,11 @@
     <el-row>
       <el-col :xs="12" :sm="4">
         <!-- S 移动端菜单按钮 -->
-        <button @click="toggleShowMenu" class="hidden-sm-and-up mobile-menu-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg>
-        </button>
+        <div @click="toggleShowMenu" :class="['hidden-sm-and-up mobile-menu-btn', showMenu ? 'is-active' : '']">
+          <div class="stick"></div>
+          <div class="stick"></div>
+          <div class="stick"></div>
+        </div>
         <!-- E 移动端菜单按钮 -->
         <router-link class="logo" to="/">
           <div v-html="logo"></div>
@@ -109,12 +111,18 @@ header {
   }
 }
 
+@media (max-width: 768px) {
+  header {
+    padding: 0 20px;
+  }
+}
+
 .logo {
   max-width: calc(100% - 40px);
   height: 60px;
   color: #000;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -132,34 +140,62 @@ nav {
 }
 
 .mobile-menu-btn {
-  border: 0;
-  font-size: 1.5em;
-  transform: translateY(4px);
-  background: transparent;
-  cursor: pointer;
+  display: inline-block;
+  margin-right: .5rem;
+  transform: translateY(2px);
 
-  svg {
-    width: 1.25rem;
-    height: 1.25rem;
+  .stick {
+    width: 25px;
+    height: 4px;
+    background-color: #000;
+    opacity: 1;
+    border-radius: 3px;
+    transition: all 250ms ease-in-out 0s;
+
+    &:nth-of-type(2) {
+      margin: 4px 0;
+    }
+  }
+
+  &.is-active {
+    .stick {
+      &:first-of-type {
+        transform: translateY(10px) rotate(45deg);
+      }
+
+      &:nth-of-type(2) {
+        opacity: 0;
+      }
+
+      &:last-of-type {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
   }
 }
 
 .mobile-menu {
   position: absolute;
-  bottom: 0;
-  left: -1rem;
+  top: 61px;
+  left: 0;
+  margin-left: -20px;
   z-index: 1000;
-  transform: translateY(-100%);
-  padding-bottom: 1.5rem;
-  width: 100vw;
+  text-align: center;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
   flex-wrap: wrap;
   flex-direction: column-reverse;
   background: #fff;
   box-shadow: 0 2px 8px rgba(229, 229, 229, 0.5);
-  transition: transform ease-in-out 0.3s;
+  transition: height ease-in-out 0.3s, width ease-in-out 0.3s, opacity ease-in-out .3s;
 
   &.is-show {
-    transform: translateY(100%);
+    width: 100vw;
+    height: calc(100vh - 61px);
+    opacity: 1;
+    overflow-y: auto;
   }
 
   .el-menu-vertical {

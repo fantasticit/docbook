@@ -1,12 +1,14 @@
 <template>
   <el-row class="page">
-    <el-col :xs="20" :sm="4" :class="{ 'is-show': showMenu, 'sider-menu': 1 }">
+    <el-col :sm="4" :class="{ 'is-show': showMenu, 'sider-menu': 1 }">
       <Menu :menus="routes" mode="vertical" />
     </el-col>
 
-    <button  :class="{ 'is-show': showMenu, 'menu-btn': 1 }" @click="toggleShowMenu">
-      <i class="el-icon-menu"></i>
-    </button>
+    <div @click="toggleShowMenu" :class="{ 'is-active': showMenu, 'menu-btn': 1, 'hidden-sm-and-up': 1 }">
+      <div class="stick"></div>
+      <div class="stick"></div>
+      <div class="stick"></div>
+    </div>
 
     <el-col :xs="24" :sm="20" class="markdown-container" ref="content">
       <article>
@@ -152,22 +154,6 @@ export default {
   overflow: auto;
 }
 
-.menu-btn {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 10px;
-  z-index: 1000;
-  width: 24px;
-  height: 24px;
-  padding: 0 4px;
-  background: #fff;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-  border: 0;
-  outline: none;
-  transition: left .3s ease-in-out;
-  transition-delay: .3s;
-}
 
 .markdown-container {
   position: relative;
@@ -247,25 +233,74 @@ export default {
 
 @media only screen and (max-width: 767px) {
   .menu-btn {
-    display: block;
+    position: absolute;
+    right: 40px;
+    bottom: 90px;
+    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    background: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+    transition: all .3s ease-in-out;
+    transition-delay: .3s;
 
-    &.is-show {
-      left: 83.33333%;
-      transition-delay: .3s;
+    .stick {
+      width: 20px;
+      height: 3px;
+      background-color: #000;
+      opacity: 1;
+      border-radius: 3px;
+      transition: all 250ms ease-in-out 0s;
+      margin-left: 10px;
+
+      &:nth-of-type(1) {
+        margin-top: 10px;
+      }
+
+      &:nth-of-type(2),
+      &:nth-of-type(3) {
+        margin-top: 4px;
+      }
+    }
+
+    &.is-active {
+      .stick {
+        &:first-of-type {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
+
+        &:last-of-type {
+          transform: translateY(-6px) rotate(-45deg);
+        }
+      }
     }
   }
 
   .sider-menu {
     position: absolute;
     left: 0;
-    z-index: 1000;
+    z-index: 10;
+    border-right: 0;
     background: #fff;
-    transform: translateX(-100%);
     transition: all ease-in-out .3s;
     transition-delay: .3s;
 
+    width: 0;
+    height: 0;
+    opacity: 0;
+
     &.is-show {
-      transform: translateX(0);
+      width: 100vw;
+      height: 100%;
+      opacity: 1;
       transition-delay: 0;
     }
   }
