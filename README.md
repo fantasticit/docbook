@@ -1,7 +1,5 @@
 # docbook
 
-[website](https://docbook.vercel.app/)
-
 `docbook` 致力于静态文档站快速生成。
 
 - 强约定使用 `docs` 下文件生成文档
