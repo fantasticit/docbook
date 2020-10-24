@@ -56,6 +56,7 @@ export default {
   },
   data() {
     return {
+      isMobile: false,
       tocRight: 0,
       showMenu: false,
       prev: null,
@@ -66,6 +67,11 @@ export default {
   watch: {
     '$route'(route) {
       this.calcNavigation()
+
+      if (this.isMobile && this.showMenu) {
+        this.showMenu = false
+      }
+
       this.$nextTick(() => {
         if (route.hash) {
           document.querySelector(`${route.hash}`).scrollIntoView()
@@ -95,6 +101,7 @@ export default {
   },
   methods: {
     calcTocRight() {
+      this.isMobile = window.innerWidth <= 768
       const el = this.$refs['content'].$el
       const width = el.offsetWidth
       const o = (width - 750) / 2 - 20
