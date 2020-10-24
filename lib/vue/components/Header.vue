@@ -23,7 +23,7 @@
       <el-col :xs="0" :sm="20">
         <nav>
           <Search />
-          <div :style="{ marginLeft: '2rem', flex: 1 }">
+          <div :style="{ marginLeft: '2rem' }">
             <Menu :menus="navs" mode="horizontal" />
           </div>
           <template v-if="$config.locales">
