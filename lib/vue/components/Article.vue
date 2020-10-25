@@ -1,6 +1,6 @@
 <template>
   <el-row class="page">
-    <el-col :sm="6" :class="{ 'is-show': showMenu, 'sider-menu': 1 }">
+    <el-col :sm="6" :md="4" :class="{ 'is-show': showMenu, 'sider-menu': 1 }">
       <Menu :menus="routes" mode="vertical" />
     </el-col>
 
@@ -10,7 +10,7 @@
       <div class="stick"></div>
     </div>
 
-    <el-col :xs="24" :sm="18" class="markdown-container" ref="content">
+    <el-col :xs="24" :sm="18" :md="20" class="markdown-container" ref="content">
       <article>
         <div v-if="$config.toc" class="toc-container" :style="{ right: tocRight + 'px' }">
           <Toc target=".markdown-content" />
