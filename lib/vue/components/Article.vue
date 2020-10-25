@@ -166,6 +166,7 @@ export default {
   position: relative;
   z-index: 1;
   height: 100%;
+  padding: 1rem;
   overflow: auto;
   scroll-behavior: smooth;
 
@@ -173,7 +174,7 @@ export default {
     position: relative;
     max-width: 750px;
     margin: 0 auto;
-    padding: 10px 1rem 60px;
+    padding: 0 0 30px;
 
     .toc-container {
       position: fixed;
@@ -200,11 +201,13 @@ export default {
         border-radius: 3px;
         box-shadow: rgba(116, 129, 141, 0.1) 0px 3px 8px 0px;
         background: #fff;
+        overflow: hidden;
 
         > a {
           display: flex;
           align-items: center;
           padding: 1rem .5rem;
+          overflow: hidden;
           
           span {
             display: inline-block;
@@ -238,7 +241,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .menu-btn {
     position: absolute;
     right: 40px;
@@ -312,9 +315,8 @@ export default {
     }
   }
 
-  .markdown-container {
-    padding: 1rem;
-    overflow-x: hidden;
-  }
+  // .markdown-container {
+  //   overflow-x: hidden;
+  // }
 }
 </style>
