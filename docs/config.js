@@ -3,7 +3,7 @@ export default {
   logo: 'Docbook',
   port: 4000,
   github: "https://github.com/fantasticit/docbook",
-  js: ["https://s2.ssl.qhres.com/!f868948f/vue.min.js"],
+  js: ["https://cdn.bootcdn.net/ajax/libs/vue/2.6.6/vue.min.js"],
   toc: true,
   navs: [
     {
