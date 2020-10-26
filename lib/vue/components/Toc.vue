@@ -16,7 +16,7 @@ export default {
   },
   watch: {
     $route() {
-      this.findHeaders()
+      this.$nextTick(() => this.findHeaders())
     }
   },
   mounted() {
