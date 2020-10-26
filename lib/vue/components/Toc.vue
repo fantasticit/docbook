@@ -13,6 +13,7 @@ export default {
   },
   data() {
     return {
+      scrollContainerEl: null,
       headers: [],
       offsets: [],
       activeId: ''
@@ -27,18 +28,16 @@ export default {
     this.activeId = this.$route.hash.replace(/^#/, '')
     this.$nextTick(() => { 
       this.findHeaders();
-      const container = document.querySelector(this.scrollContainer)
-      container.addEventListener('scroll',  this.sync)
+      this.scrollContainerEl = document.querySelector(this.scrollContainer)
+      this.scrollContainerEl.addEventListener('scroll',  this.sync)
     })
   },
-  destroyed() {
-    const container = document.querySelector(this.scrollContainer)
-    container.addEventListener('scroll',  this.sync)
+  beforeDestroy() {
+    this.scrollContainerEl.removeEventListener('scroll',  this.sync)
   },
   methods: {
     sync: throttle(function () {
-      const container = document.querySelector(this.scrollContainer)
-      const scrollTop = container.scrollTop
+      const scrollTop = this.scrollContainerEl.scrollTop
       let active = this.offsets.find(o => o.offsetTop >= scrollTop) || this.offsets[this.offsets.length - 1]
       if (active && active.id) {
         this.activeId = active.id
