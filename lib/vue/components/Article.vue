@@ -74,7 +74,7 @@ export default {
 
       this.$nextTick(() => {
         if (route.hash) {
-          document.querySelector(`${route.hash}`).scrollIntoView()
+          document.getElementById(`${route.hash.replace(/^#/, '')}`).scrollIntoView()
         } else {
           this.$refs['content'].$el.scrollTop = 0  
         }
@@ -89,7 +89,7 @@ export default {
 
     if (hash) {
       this.$nextTick(() => {
-        document.querySelector(`${decodeURIComponent(hash)}`).scrollIntoView()
+        document.getElementById(`${decodeURIComponent(hash.replace(/^#/, ''))}`).scrollIntoView()
       })
     }
 
