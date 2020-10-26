@@ -1,8 +1,10 @@
 <script>
+import { throttle } from '../utils/throttle'
 export default {
   name: 'Toc',
   props: {
     target: String,
+    scrollContainer: String,
     includeLevel: {
       type: Array,
       required: false,
@@ -11,18 +13,37 @@ export default {
   },
   data() {
     return {
-      headers: []
+      headers: [],
+      offsets: [],
+      activeId: ''
     }
   },
   watch: {
     $route() {
       this.$nextTick(() => this.findHeaders())
-    }
+    },
   },
   mounted() {
-    this.$nextTick(() => this.findHeaders())
+    this.activeId = this.$route.hash.replace(/^#/, '')
+    this.$nextTick(() => { 
+      this.findHeaders();
+      const container = document.querySelector(this.scrollContainer)
+      container.addEventListener('scroll',  this.sync)
+    })
+  },
+  destroyed() {
+    const container = document.querySelector(this.scrollContainer)
+    container.addEventListener('scroll',  this.sync)
   },
   methods: {
+    sync: throttle(function () {
+      const container = document.querySelector(this.scrollContainer)
+      const scrollTop = container.scrollTop
+      let active = this.offsets.find(o => o.offsetTop >= scrollTop) || this.offsets[this.offsets.length - 1]
+      if (active && active.id) {
+        this.activeId = active.id
+      }
+    }, 100),
     findHeaders() {
       const minLevel = this.includeLevel[0]
       const maxLevel = this.includeLevel[1]
@@ -58,27 +79,47 @@ export default {
         return result
       }
 
+      this.offsets = []
       const selector = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map(k => `${this.target} ${k}`).join(', ')
-      this.headers = processHeaders(Array.from(document.querySelectorAll(selector)).map(node => ({
-        level: +node.tagName.match(/\d/)[0],
-        title: node.innerText,
-        slug: node.getAttribute('id')
-      })))
+      this.headers = processHeaders(Array.from(document.querySelectorAll(selector)).map(node => {
+        this.offsets.push({
+          offsetTop: node.offsetTop,
+          id: node.getAttribute('id')
+        })
+        
+        return ({
+          level: +node.tagName.match(/\d/)[0],
+          title: node.innerText,
+          slug: node.getAttribute('id')
+        })
+      }))
     }
   },
   render(h) {
     if (!this.headers) {
       return null
     }
+
+    const vm = this
+
     const renderHeaders = (items) => {
       return h(
         'ul',
         items.map((item) =>
-          h('li', [
+          h('li', {
+            on: {
+              click(evt) {
+                evt.stopPropagation()
+                vm.activeId = item.slug
+                document.getElementById(item.slug).scrollIntoView()
+              }
+            },
+          }, [
             h(
-              'router-link',
+              'span',
               {
                 props: { to: `#${item.slug}` },
+                class: this.activeId === item.slug ? 'is-active' : '',
               },
               item.title
             ),

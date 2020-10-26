@@ -122,7 +122,8 @@ button {
 
     li {
       position: static;
-      a {
+
+      span {
         position: static;
         display: inline-block;
         width: 100%;
@@ -139,7 +140,7 @@ button {
           height: 16px;
         }
 
-        &.router-link-exact-active {
+        &.is-active {
           color: #000;
           font-weight: 600;
 

@@ -13,7 +13,7 @@
     <el-col :xs="24" :sm="18" :md="20" class="markdown-container" ref="content">
       <article>
         <div v-if="$config.toc" class="toc-container" :style="{ right: tocRight + 'px' }">
-          <Toc target=".markdown-content" />
+          <Toc target=".markdown-content" scrollContainer=".markdown-container" />
         </div>
         <router-view class="markdown-content" ref="markdown">
         </router-view>
