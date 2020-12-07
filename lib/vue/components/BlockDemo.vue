@@ -6,16 +6,22 @@
     <div class="editor" ref="editor">
       <div class="bock-demo__ctrl">
         <!-- <el-tooltip class="item" effect="dark" content="运行" placement="top"> -->
-          <span title="运行" @click="syncCode" class="icon"><img src="./svgs/play.svg" alt="运行" /></span>
+        <span title="运行" @click="syncCode" class="icon"
+          ><img src="./svgs/play.svg" alt="运行"
+        /></span>
         <!-- </el-tooltip> -->
         <template v-if="!isFullscreen">
           <!-- <el-tooltip class="item" effect="dark" content="全屏" placement="top"> -->
-            <span  title="全屏" @click="fullscreen" class="icon"><img src="./svgs/full-screen.svg" alt="全屏" /></span>
+          <span title="全屏" @click="fullscreen" class="icon"
+            ><img src="./svgs/full-screen.svg" alt="全屏"
+          /></span>
           <!-- </el-tooltip> -->
         </template>
         <template v-if="isFullscreen">
           <!-- <el-tooltip class="item" effect="dark" content="取消全屏" placement="top"> -->
-            <span title="取消全屏" @click="fullscreen" class="icon"><img src="./svgs/recovery.svg" alt="取消全屏" /></span>
+          <span title="取消全屏" @click="fullscreen" class="icon"
+            ><img src="./svgs/recovery.svg" alt="取消全屏"
+          /></span>
           <!-- </el-tooltip> -->
         </template>
         <!-- <el-tooltip class="item" effect="dark" content="复制代码" placement="top">
@@ -30,7 +36,7 @@
           <el-tab-pane label="CSS" name="css">
             <textarea ref="cssTextarea"></textarea>
           </el-tab-pane>
-           <el-tab-pane label="JavaScript" name="js">
+          <el-tab-pane label="JavaScript" name="js">
             <textarea ref="jsTextarea"></textarea>
           </el-tab-pane>
         </el-tabs>
@@ -40,14 +46,14 @@
   </div>
 </template>
 <script>
-import CodeMirror from 'codemirror'
-import Split from 'split.js'
-import { unescape } from 'scapegoat'
-import 'codemirror/mode/htmlmixed/htmlmixed'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/css/css'
-import 'codemirror/lib/codemirror.css'
-import { throttle } from '../utils/throttle'
+import CodeMirror from 'codemirror';
+import Split from 'split.js';
+import { unescape } from 'scapegoat';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/css/css';
+import 'codemirror/lib/codemirror.css';
+import { throttle } from '../utils/throttle';
 
 export default {
   props: {
@@ -57,7 +63,7 @@ export default {
     js: String,
   },
 
-  data () {
+  data() {
     return {
       activeTab: 'js',
       htmlEditor: null,
@@ -67,114 +73,133 @@ export default {
       visible: true,
       isJSON: false,
       isFullscreen: false,
-      showEditor: true
-    }
+      showEditor: true,
+    };
   },
 
-  mounted () {
-    let tip = this.tip.split(',')
+  mounted() {
+    let tip = this.tip.split(',');
 
     try {
-      tip = JSON.parse(JSON.stringify(tip))
-    } catch (e) { }
+      tip = JSON.parse(JSON.stringify(tip));
+    } catch (e) {}
 
-    let innerWidth = window.innerWidth
-    this.isFullscreen = tip.indexOf('fullscreen') > -1
-      ; (this.showEditor = innerWidth >= 768) && this.initSplit()
+    let innerWidth = window.innerWidth;
+    this.isFullscreen = tip.indexOf('fullscreen') > -1;
+    (this.showEditor = innerWidth >= 768) && this.initSplit();
 
-    this.jsEditor = this.initEditor('jsTextarea', 'application/javascript', this.js)
+    this.jsEditor = this.initEditor('jsTextarea', 'application/javascript', this.js);
 
     try {
       this.$nextTick(() => {
-        this.syncCode()
-      })
+        this.syncCode();
+      });
     } catch (e) {
-      throw e
+      throw e;
     }
 
-    window.addEventListener('resize', this.initSplit)
+    window.addEventListener('resize', this.initSplit);
   },
   destroyed() {
-    window.removeEventListener('resize', this.initSplit)
+    window.removeEventListener('resize', this.initSplit);
   },
   methods: {
-    toggle () {
-      this.visible = !this.visible
+    toggle() {
+      this.visible = !this.visible;
     },
-    unescape (html) {
-      return unescape(html)
+    unescape(html) {
+      return unescape(html);
     },
-
-    initSplit () {
+    initSplit() {
       Split([this.$refs['preview'], this.$refs['editor']], {
-        sizes: [50, 50]
-      })
+        sizes: [50, 50],
+      });
     },
-
-    initEditor (ref, mode = 'application/javascript', toSetValue) {
+    initEditor(ref, mode = 'application/javascript', toSetValue) {
       const editor = CodeMirror.fromTextArea(this.$refs[ref], {
         mode: mode,
         extraKeys: {
-          'Ctrl-Space': 'autocomplete'
+          'Ctrl-Space': 'autocomplete',
         },
         foldGutter: true,
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         lineNumbers: true,
-        lineWrapping: false
-      })
-      editor.getDoc().setValue(this.unescape(toSetValue))
-      return editor
+        lineWrapping: false,
+      });
+      editor.getDoc().setValue(this.unescape(toSetValue));
+      return editor;
     },
-
+    // 还原 vue 语法，见 vue-md-loader
+    transformHTML(html) {
+      let str = String(html);
+      const reg = /(?<=\({\({)(.|\S)*?(?=\}\)\}\))/;
+      let matches = null;
+      while ((matches = reg.exec(str)) !== null) {
+        const text = matches[0];
+        const index = matches.index;
+        str =
+          str.substring(0, index - 4) + '{{' + text + '}}' + str.substring(index + text.length + 4);
+      }
+      return str;
+    },
     checkAndInitEditor(to) {
       this.$nextTick(() => {
-         switch (to) {
+        switch (to) {
           case 'js':
-            !this.jsEditor && (this.jsEditor = this.initEditor('jsTextarea', 'application/javascript', this.js));
+            !this.jsEditor &&
+              (this.jsEditor = this.initEditor('jsTextarea', 'application/javascript', this.js));
             break;
           case 'css':
-            !this.cssEditor && (this.cssEditor = this.initEditor('cssTextarea', 'text/css', this.css));
+            !this.cssEditor &&
+              (this.cssEditor = this.initEditor('cssTextarea', 'text/css', this.css));
             break;
           case 'html':
-            !this.htmlEditor && (this.htmlEditor = this.initEditor('htmlTextarea', 'text/html', this.html));
+            !this.htmlEditor &&
+              (this.htmlEditor = this.initEditor(
+                'htmlTextarea',
+                'text/html',
+                this.transformHTML(this.html)
+              ));
             break;
         }
-      })
+      });
     },
-
-    syncCode () {
-      const oDemo = this.$refs['demo']
-      oDemo.innerHTML = `<iframe class="chart-frame" frameborder="0"></iframe>`
-      const iframe = oDemo.querySelector('iframe')
-      const js = this.$config.js || []
-      const srcs = js.length ? js.reduce((a, c) => {
-        a += `<script src=${c}><\/script>`
-        return a
-      }, ``) : ''
+    syncCode() {
+      const oDemo = this.$refs['demo'];
+      oDemo.innerHTML = `<iframe class="chart-frame" frameborder="0"></iframe>`;
+      const iframe = oDemo.querySelector('iframe');
+      const js = this.$config.js || [];
+      const srcs = js.length
+        ? js.reduce((a, c) => {
+            a += `<script src=${c}><\/script>`;
+            return a;
+          }, ``)
+        : '';
       iframe.contentWindow.document.write(
         `
         <style>${this.cssEditor ? this.cssEditor.getValue() : this.css}<\/style>
-        ${this.htmlEditor ? this.htmlEditor.getValue(): this.html}
+        ${this.transformHTML(this.htmlEditor ? this.htmlEditor.getValue() : this.html)}
         ${srcs}
         <script>${this.jsEditor ? this.jsEditor.getValue() : this.js}<\/script>
         `
-      )
+      );
     },
-
-    fullscreen () {
+    fullscreen() {
       this.isFullscreen = !this.isFullscreen;
       if (window.parent) {
         window.parent.postMessage({ fullScreen: this.isFullscreen }, '*');
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
 .block-demo {
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  display: flex;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
